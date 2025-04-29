@@ -15,7 +15,7 @@ public class interfazVisual extends JFrame {
         gestor = new gestionParques();
         gestor.crearParque(estaciones);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 600);
+        setSize(600, 550);
         setLayout(new BorderLayout());
         agregarPanelCarga();
         agregarPanelVisualizacion();

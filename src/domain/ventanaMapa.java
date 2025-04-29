@@ -11,7 +11,7 @@ public class ventanaMapa extends JFrame {
     public ventanaMapa(mapaPanel mapa) {
         super("Mapa del Parque");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(600, 600);
+        setSize(600, 550);
         setLayout(new BorderLayout());
         add(mapa, BorderLayout.CENTER);
         setLocationRelativeTo(null);
