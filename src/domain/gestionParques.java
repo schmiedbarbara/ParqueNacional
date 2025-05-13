@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 
 public class gestionParques {
@@ -44,6 +47,10 @@ public class gestionParques {
         }
     }
     
+    public int tamano() {
+        return parque.tamano();
+    }
+    
     public int[][] algoritmoPrim() {
         int numeroEstaciones = parque.tamano();
         boolean[] estaEnAGM = new boolean[numeroEstaciones];  // aca van los vertices que estan en el AGM
@@ -86,4 +93,58 @@ public class gestionParques {
 
         return agm;  //devuelve una nueva matriz de adyacencia que solo tiene el AGM, asi podemos comparar ambas 
     }
+    
+    public int[][] algoritmoKruskal() {
+        int numeroEstaciones = parque.tamano();
+        List<int[]> aristas = new ArrayList<>();
+
+        // recopilar todas las aristas con sus pesos
+        for (int i = 0; i < numeroEstaciones; i++) {
+            for (int j = i + 1; j < numeroEstaciones; j++) {
+                if (parque.pesoArista(i, j) > 0) {
+                    aristas.add(new int[]{i, j, parque.pesoArista(i, j)});
+                }
+            }
+        }
+
+        // aca se ordena por peso
+        aristas.sort(Comparator.comparingInt(e -> e[2]));
+
+        int[][] agm = new int[numeroEstaciones][numeroEstaciones];
+        int[] parent = new int[numeroEstaciones];
+
+        // inciarlizardor de conjuntos
+        for (int i = 0; i < numeroEstaciones; i++) {
+            parent[i] = i;
+        }
+
+        for (int[] arista : aristas) {
+            int origen = arista[0];
+            int destino = arista[1];
+
+            if (find(origen, parent) != find(destino, parent)) {
+                union(origen, destino, parent);
+                agm[origen][destino] = arista[2];
+                agm[destino][origen] = arista[2];
+            }
+        }
+
+        return agm;
+    }
+
+    // funcion para encontrar el conjunto al que pertenece un vertice
+    private int find(int i, int[] parent) {
+        while (i != parent[i]) i = parent[i];
+        return i;
+    }
+
+    // funcion para unir dos conjuntos
+    private void union(int i, int j, int[] parent) {
+        int ri = find(i, parent);
+        int rj = find(j, parent);
+        if (ri != rj) {
+            parent[ri] = rj;
+        }
+    }
+    
 }
