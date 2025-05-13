@@ -10,12 +10,12 @@ public class Parque {
         A = new int[vertices][vertices];							
         for (int i = 0; i < vertices; i++) { 
             for (int j = 0; j < vertices; j++) {
-                A[i][j] = 0;  // Inicializamos las aristas no existentes con 0
+                A[i][j] = 0;  // inicializamos las aristas no existentes con 0
             }
         }
     }
     
-    // Agregado de aristas con peso
+    // agregado de aristas con peso
     public void agregarArista(int i, int j, int peso) {
         verificarVertice(i);
         verificarVertice(j);
@@ -24,7 +24,7 @@ public class Parque {
         A[j][i] = peso; 
     }
 
-    // Eliminacion de aristas
+    // eliminacion de aristas
     public void eliminarArista(int i, int j) {
         verificarVertice(i);
         verificarVertice(j);
@@ -33,18 +33,18 @@ public class Parque {
         A[j][i] = 0;
     }
 
-    public int pesoArista(int i, int j) {     // Informa el peso de la arista especificada
+    public int pesoArista(int i, int j) {     // informa el peso de la arista especificada
         verificarVertice(i);
         verificarVertice(j);
         return A[i][j];
     }
 
-    // Cantidad de vertices
+    // cantidad de vertices
     public int tamano() {
         return A.length;
     }
     
-    // Vecinos de un vertice
+    // vecinos de un vertice
     public Set<Integer> vecinos(int i) {
         verificarVertice(i);
         
